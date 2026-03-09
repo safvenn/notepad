@@ -5,16 +5,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Notepad</title>
         <link rel="icon" type="image/png" href="./notepad_icon.png">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
         <style>
             body {
                 background-color: #ffffff;
                 color: #000000;
-                font-family: 'Consolas', 'Lucida Console', 'Courier New', monospace;
-                font-size: 14px;
+                font-family: 'Roboto Mono', 'Consolas', 'Courier New', monospace;
+                font-size: 15px;
                 margin: 0;
                 padding: 0;
-                line-height: 1.2;
-                overflow: hidden; /* Prevent body scroll, use container scroll */
+                line-height: 1.5;
+                overflow: hidden;
             }
             
             /* Notepad Title Bar */
@@ -89,8 +90,9 @@
             .notepad-content {
                 height: calc(100vh - 85px); /* Subtract title, menu, and status bar */
                 overflow-y: scroll;
-                padding: 5px 10px;
+                padding: 10px 10px;
                 white-space: pre-wrap;
+                outline: none; /* Remove focus border */
             }
             
             /* Status Bar */
@@ -167,7 +169,7 @@
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = 'fib.txt';
+                a.download = 'fibinaaci.txt';
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
@@ -175,638 +177,480 @@
             }
         </script>
     </head>
-    <body>      
+    <body>
+        
         <div class="menu-bar">
-            <div class="menu-item" onclick="exportToNotepad()">File (Open in Notepad)</div><br>
+            <div class="menu-item" onclick="exportToNotepad()">Save</div>
             <div class="menu-item">Edit</div>
             <div class="menu-item">Format</div>
             <div class="menu-item">View</div>
             <div class="menu-item">Help</div>
         </div>
-        
-        <div class="notepad-content">
-            <h1>PHP programs</h1>
 
-    <div class="program-container">
-        1.FRUIT SELECTION
-Source Code:
-<pre><code>&lt;html&gt;
-&lt;head&gt;fruit list&lt;/head&gt;
-&lt;body&gt;
-&lt;form method="POST"&gt;
-&lt;select name="fruit"&gt;
-&lt;option value="orange"&gt;Orange&lt;/option&gt;
-&lt;option value="banana"&gt;Banana&lt;/option&gt;
-&lt;option value="apple"&gt;Apple&lt;/option&gt;
-&lt;option value="kiwi"&gt;Kiwi&lt;/option&gt;
-&lt;/select&gt;
-&lt;input type="submit" value="click"&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-&lt;?php
-if($_POST)
-{
-$choice=$_POST["fruit"];
-if(isset($choice))
-{
-echo"the selected fruit is $choice";
-}
-}
-?&gt;</code></pre>
-    </div>
-    <div class="program-container">
-        2.Fibonacci
-Source Code:
-<pre><code>&lt;?php
-function fib($n)
-{
-if($n==0||$n==1)
-{
-return($n);
-}
-else{
-return(fib($n-1)+fib($n-2));
-}
-}
-if(isset($_POST['submit']))
-{
-$n=$_POST['v1'];
-echo"fibnoci numbers are &lt;br&gt;";
-for($i=0;$i&lt;$n;$i++)
-{
-echo fib($i);
-echo "&lt;br&gt;";
-}
-}
-?&gt;
-&lt;form method ="POST"&gt;
-&lt;input type="text" name="v1"placeholder="enter
-your range"&gt;
-&lt;input type ="submit" name="submit"&gt;
-&lt;/form&gt;</code></pre>
-_________________________________________
-3.Cookie
-Source Code:
-<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
- &lt;meta charset="UTF-8"&gt;
- &lt;meta http-equiv="X-UA-Compatible"
-content="IE=edge"&gt;
- &lt;meta name="viewport"
-content="width=device-width, initial-scale=1.0"&gt;
- &lt;title&gt;Document&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h1&gt;Cookie&lt;/h1&gt;
-&lt;?php
-$current_time = time();
-// Set cookie (expires in 1 hour)
-setcookie('check_last_visit', date('G:i - D/M/Y',
-$current_time), time() + 3600);
-if (isset($_COOKIE['check_last_visit'])) {
- $visit = $_COOKIE['check_last_visit'];
- echo "Visit time: " . $visit;
-} else {
- echo "Invalid date and time";
-}
-?&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-_________________________________________
-4.Bio Data
-Source Code:
-<pre><code>&lt;html&gt;
-&lt;body&gt;
-&lt;form action=" " method="POST"&gt;
-&lt;h1&gt;&lt;center&gt; BIO-DATA &lt;/center&gt;&lt;/h1&gt;
-Name: &lt;input type="text" name="name"&gt;&lt;br&gt;
-Address: &lt;textarea name="address"&gt;
-&lt;/textarea&gt;&lt;br&gt;
-Age: &lt;input type="text" name="age"&gt;&lt;br&gt;
-Mobile: &lt;input type="text" name="mobile"&gt;&lt;br&gt;
-Email: &lt;input type="text" name="email"&gt;&lt;br&gt;
-Qualification: &lt;input type="text"
-name="qualification"&gt;&lt;br&gt;
-&lt;input type="submit" value=display&gt;&lt;br&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;
-&lt;?php
-if ($_POST)
-{
-echo"&lt;h1&gt;&lt;center&gt; BIO-DATA &lt;/center&gt;&lt;/h1&gt;";
-echo"Name : ".$_POST["name"]."&lt;br&gt;";
-echo"Address : ".$_POST["address"]."&lt;br&gt;";
-echo"Age : ".$_POST["age"]."&lt;br&gt;";
-echo"Mobile : ".$_POST["mobile"]."&lt;br&gt;";
-echo"Email : ".$_POST["email"]."&lt;br&gt;";
-echo"Qualification : ".$_POST["qualification"]."&lt;br&gt;";
-}
-?&gt;</code></pre>
-_________________________________________
-5.Login Page
-Source Code:
-<pre><code>&lt;html&gt;
-&lt;head&gt;&lt;/head&gt;
-&lt;body&gt;
-&lt;form action= " " method="POST"&gt;
-username:&lt;input type="text" name="usr"&gt;&lt;br&gt;&lt;br&gt;
-password:&lt;input type="password"
-name="pass"&gt;&lt;br&gt;&lt;br&gt;&lt;br&gt;
-&lt;input type="submit" value="login"&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-PHP Code:
-<pre><code>&lt;?php
-if($_POST)
-{
-$usr1=$_POST['usr'];
-$paswd=$_POST['pass'];
-$con=mysqli_connect("localhost","root","","College")
-;
-if($con)
-{
-echo"successfully connected&lt;br&gt;";
-$qry="select username,password from logiin where
-username='$usr1' and password='$paswd'";
-$result=mysqli_query($con,$qry);
-$nos=mysqli_num_rows($result);
-if($nos&gt;0)
-echo"&lt;br&gt; $usr1,you are logged successfully...";
-else
-echo "login denied";
-}
-}
-?&gt;</code></pre>
-Database code:
-<pre><code>create database College;
-use college;
-create table logiin(username varchar(15),password
-varchar(15));
-insert into logiin values(“ali”,”123456”);
-insert into logiin values(“sai”,”654321”);
-insert into logiin values(“alan”,”543210”);</code></pre>
-    </div>
-    <div class="program-container">
-6.STUDENT TABLE
-Source Code:
-<pre><code>&lt;html&gt;
-&lt;head&gt;
-&lt;title&gt;marklist&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;h3&gt;&lt;center&gt;marksheet&lt;/center&gt;&lt;/h3&gt;
-&lt;form method="post" action=""&gt;
-Regno:&lt;input type="text" name="txtreg"&gt;
-&lt;input type="submit" value="show"&gt;
-&lt;/form&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
-<pre><code>&lt;?php
-if($_POST)
-{
-$rg=$_POST['txtreg'];
-$con=mysqli_connect("localhost","root","","mark");
-if($con)
-echo "successfully connected to db...";
-$qry="select * from student where rollno='$rg'";
-$result=mysqli_query($con,$qry);
-$nos=mysqli_num_rows($result);
-echo "&lt;table border=1&gt;";
-echo
-"&lt;tr&gt;&lt;th&gt;rollno&lt;/th&gt;&lt;th&gt;name&lt;/th&gt;&lt;th&gt;mark&lt;/th&gt;&lt;t
-h&gt;grade&lt;/th&gt;&lt;/tr&gt;";
-while($row=mysqli_fetch_row($result))
-{
-echo "&lt;br&gt;\n";
-echo
-"&lt;tr&gt;&lt;td&gt;$row[0]&lt;/td&gt;&lt;td&gt;$row[1]&lt;/td&gt;&lt;td&gt;$row[2]&lt;
- /td&gt;&lt;td&gt;$row[3]&lt;/td&gt;&lt;/tr&gt;";
-}
-echo "&lt;/table&gt;";
-}
-?&gt;
-Database Code:
-<pre><code>create database mark;
-use mark;
-create table student(rollno varchar(10),name
-varchar(10),mark varchar(10),grade varchar(10));
-insert into student values("1","sana","10","A");
-insert into student values("2","sree","20","A");</code></pre>
-    </div>
+        <div class="notepad-content" contenteditable="true" spellcheck="false">
+SHELL
+___________________________________
 
-    <h1>JAVA PROGRAMS</h1>
-    <div class="program-container">
-1.FIBONACCI SERIES
-fib
-n1: int=0
-n2: int=1
-n3: int
-limit: int
-i: int
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Fib
-{
-public static void main(String args[])
-{
-Scanner in=new Scanner(System.in);
-int n1=0,n2=1,n3,limit,i;
-System.out.println("ENTER THE LIMIT:");
-limit=in.nextInt();
-System.out.print(n1+"\t"+n2);
-for(i=2;i&lt;limit;i++)
-{
-n3=n1+n2;
-n1=n2;
-n2=n3;
-System.out.print("\t"+n3);
-}
-}
-}</code></pre>
-______________________________________
-2.Armstrong numbers
-armstrong
-~l: int
-~h: int
-~i: int
-~rem: int
-~sum: int
-~num: int
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Armstrong
-{
-public static void main(String args[])
-{
-Scanner in=new Scanner(System.in);
-int l,h,i,rem, sum,num;
-System.out.println("ENTER THE LOWER LIMIT
-AND UPPER LIMIT:");
-l=in.nextInt();
-h=in.nextInt();
-System.out.println("ARMSTRONG NUMBERS:");
-for(i=1;i&lt;=h;i++)
-{
-num=i;
-sum=0;
-while(num!=0)
-{
-rem=num%10;
-sum=sum+(rem*rem*rem);
-num=num/10;
-}
-if(sum==i)
-System.out.println(i);
-}
-}
-}</code></pre>
-______________________________________
-3. base conversion.
-six
-~num: int
-~rem: int
-~base: int
-~str:String
-~dig[]:char
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Six
-{
-public static void main(String args[])
-{
-Scanner in =new Scanner(System.in);
-int num,rem,base;
-String str="";
-char
-dig[]={'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
-System.out.println("ENTER THE NUMBER:");
-num=in.nextInt();
-System.out.println("ENTER THE BASE TO CONVERT:");
-base=in.nextInt();
-while(num&gt;0)
-{
-rem=num%base;
-str=dig[rem]+str;
-num=num/base;
-}
-System.out.println(str);
-}
-}</code></pre>
-______________________________________
-4.merge two arrays.
-merge
-~m: int
-~n: int
-~i: int
-~j: int
-~k: int
-~a1[]: int
-~a2[]: int
-~a3[]: int
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Merge
-{
-public static void main(String args[])
-{
-Scanner in=new Scanner(System.in);
-int m,n,i,j,k=0;
-int a1[]=new int[10];
-int a2[]=new int[10];
-int a3[]=new int[20];
-System.out.println("enter the size of array 1:");
-m=in.nextInt();
-System.out.println("enter the elements:");
-for(i=0;i&lt;m;i++)
-{
-a1[i]=in.nextInt();
-}
-System.out.println("enter the size of array 2:");
-n=in.nextInt();
-System.out.println("enter the elements:");
-for(i=0;i&lt;n;i++)
-{
-a2[i]=in.nextInt();
-}
-i=0;
-j=0;
-k=0;
-while(i&lt;m&amp;&amp;j&lt;n)
-{
-if(a1[i]&lt;a2[j])
-{
-a3[k]=a1[i];
-i++;
-}
+1. area of a circle.
+echo "Enter the radius"
+read r
+echo $r
+echo "Area of the circle is"
+echo "3.14*$r*$r"|bc 
+_________________________________
+
+2. even or odd.
+echo "enter a number:"
+read n
+rem=$(( $n % 2 ))
+if [ $rem -eq 0 ]
+then
+echo "$n is even number"
 else
+echo "$n is odd number"
+fi
+___________________________________
+
+3. greatest of three numbers.
+echo "Enter three Integers:"
+read a b c
+if [ $a -gt $b -a $a -gt $c ]
+then
+echo "$a is Greatest"
+elif [ $b -gt $c -a $b -gt $a ]
+then
+echo "$b is Greatest"
+else
+echo "$c is Greatest!"
+fi
+________________________________
+
+4. sum of all digits
+echo "Enter a Number:"
+read n
+temp=$n
+sd=0
+sum=0
+while [ $n -gt 0 ]
+do
+sd=$(( $n % 10 ))
+n=$(( $n / 10 ))
+sum=$(( $sum + $sd ))
+done
+echo "Sum is $sum"
+___________________________________
+
+5. find reverse of a number.
+echo "Enter a Number:"
+read a
+rev=0
+sd=0
+or=$a
+while [ $a -gt 0 ]
+do
+sd=`expr $a % 10`
+temp=`expr $rev \* 10`
+rev=`expr $temp + $sd`
+a=`expr $a / 10`
+done
+echo "Reverse of $or is $rev"
+_______________________________
+
+6. prime numbers
+echo "How many prime numbers:"
+read limit
+echo "1"
+i=2
+while [ $i -le $limit ]
+do
+flag=1
+j=2
+while [ $j -lt $i ]
+do
+rem=$(( $i % $j ))
+if [ $rem -eq 0 ]
+then
+flag=0
+break
+fi
+j=$(( $j+1 ))
+done
+if [ $flag -eq 1 ]
+then
+echo "$i"
+fi
+i=$(( $i+1 ))
+done 
+___________________________________
+
+7.fibinocci numbers.
+echo "how many numbers do you want of Fibinocci Series?"
+read total
+x=0
+y=1
+i=2
+echo "fibinocci series upto $total terms::"
+echo "$x"
+echo "$y"
+while [ $i -lt $total ]
+do
+i=`expr $i + 1`
+z=`expr $x + $y`
+echo "$z"
+x=$y
+y=$z
+done
+____________________________________
+
+8. factorial of a number.
+echo "Enter the number"
+read n
+fact=1
+while [ $n -gt 0 ]
+do
+fact=`expr $fact \* $n`
+n=`expr $n - 1`
+done
+echo "Factorial is $fact"
+____________________________________
+
+9.GoodMorning/Good afternoon /
+h=$(date +"%H")
+if [ $h -gt 6 -a $h -le 12 ]
+then
+echo "good morning"
+elif [ $h -gt 12 -a $h -le 16 ]
+then
+echo "good afternoon"
+else
+echo "good evening"
+fi
+____________________________________
+
+10.armstrong or not.
+echo "Enter a number"
+read c
+x=$c
+sum=0
+r=0
+n=0
+while [ $x -gt 0 ]
+do
+r=`expr $x % 10`
+n=`expr $r \* $r`
+sum=`expr $sum + $n`
+x=`expr $x / 10`
+done
+if [ $sum -eq $c ]
+then
+echo "it is an Armstrong number"
+else
+echo "it is not an armstrong number"
+fi 
+___________________________________
+
+11. palindrome or not.
+read -p "Enter the String :" string
+len=${#string}
+for (( i=$len -1; i>=0; i--))
+do
+reverse="$reverse{string:$i:1}"
+done
+echo"Reverse is :$reverse"
+echo $string > temp
+rvs="$(rev temp)"
+if [ $string = $rvs ]
+then
+echo "Given string is palindrome"
+else
+echo "Given string is not a palindrome"
+fi 
+_________________________________
+
+ANDROID
+___________________________________
+
+1.Prime or Not MainActivity.java file
+package com.example.primenumber;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+public class MainActivity extends Activity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+final EditText GetNumber = (EditText)findViewById(R.id.getvalue);
+Button button = (Button) findViewById(R.id.result);
+button.setOnClickListener(new OnClickListener() {
+public void onClick(View arg0) {
+int flag=0;
+double num1 = Double.parseDouble(GetNumber.getText().toString());
+for (int i = 2; i < num1; i++)
 {
-a3[k]=a2[j];
-j++;
+if (num1 % i == 0)
+flag = 1;
 }
-k++;
-}
-if(i&gt;=m)
+if (flag == 0)
 {
-while(j&lt;n)
-{
-a3[k]=a2[i];
-j++;
-k++;
+Toast t = Toast.makeText(getApplicationContext(),
+"Given Number is Prime Number",Toast.LENGTH_SHORT); t.show();
+}else{
+Toast t = Toast.makeText(getApplicationContext(),"Given Number is Not a Prime Number",Toast.LENGTH_SHORT);
+t.show();
 }
 }
-if(j&gt;=n)
-{
-while(i&lt;m)
-{
-a3[k]=a1[i];
-i++;
-k++;
+});
+}} 
+_______________________________
+
+2.Multiplication MainActivity.java file
+package com.example.multiplicationyims;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends Activity {
+EditText editText;
+Button button;
+TextView result;
+int ans=0;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+editText=(EditText)findViewById(R.id.editText1);
+button=(Button)findViewById(R.id.button1);
+result=(TextView)findViewById(R.id.textView1);
+button.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View arg0) {
+// TODO Auto-generated method stub
+StringBuffer buffer = new StringBuffer();
+String fs=editText.getText().toString();
+int n = Integer.parseInt(fs);
+for (int i = 1; i <= 15; i++) {
+ans = (i * n);
+buffer.append(i + " X " + n + " = " + ans + "\n");
+result.setText(buffer);
 }
 }
-System.out.println("after merging:");
-for(i=0;i&lt;m+n;i++)
-{
-System.out.println(a3[i]);
+});
+} 
+_______________________________ 
+
+3.TOAST MainActivity.java file
+package com.example.toastmessage;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.Toast;
+public class MainActivity extends Activity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity main);
+Button button = (Button) findViewById(R.id.Toast);
+button.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View arg0) {
+// TODO Auto-generated method stub
+Toast t = Toast.makeText(getApplicationContext(),
+"Welcome To Android Proramming",Toast.LENGTH_SHORT); t.show();
 }
-} }</code></pre>
-5.transpose of a matrix.
-Matrix
-~n: int
-~m: int
-~i: int
-~j: int
-~trace: int=0
-~a[][]: int
-~b[][]: int
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Matrix
-{
-public static void main(String args[])
-{
-Scanner in=new Scanner(System.in);
-int n,m,i,j,trace=0;
-int a[][]=new int[10][10];
-int b[][]=new int[10][10];
-System.out.println("ENTER THE ORDER OF THE MATRIX:");
-m=in.nextInt();
-n=in.nextInt();
-System.out.println("ENTER THE ELEMENTS:");
-for(i=0;i&lt;m;i++)
-{
-for(j=0;j&lt;n;j++)
-{
-a[i][j]=in.nextInt();
+});
+}
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+getMenuInflater().inflate(R.menu.activity_main, menu);
+return true;
 }
 }
-for(i=0;i&lt;m;i++)
-{
-for(j=0;j&lt;n;j++)
-{
-b[j][i]=a[i][j];
-if(i==j)
-{
-trace=trace+a[i][j];
+__________________________________ 
+
+4.Add Two Numbers MainActivity.java file
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+public class MainActivity extends Activity {
+EditText firstNumber;
+EditText secondNumber;
+TextView addResult;
+Button btnAdd;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+firstNumber = (EditText)findViewById(R.id.txtNumber1);
+secondNumber = (EditText)findViewById(R.id.txtNumber2);
+addResult = (TextView)findViewById(R.id.txtResult);
+Button btnAdd = (Button)findViewById(R.id.btnAdd);
+btnAdd.setOnClickListener(new OnClickListener() {
+public void onClick(View v) {
+double num1 = Double.parseDouble(firstNumber.getText().toString());
+double num2 = Double.parseDouble(secondNumber.getText().toString());
+double sum = num1 + num2;
+addResult.setText(Double.toString(sum));
+}
+}); }
+_____________________________________
+
+5.Simple user MainActivity.java file
+package com.example.displaymessage;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.View; import android.widget.Button;
+import android.widget.TextView;
+import android.view.View.OnClickListener;
+import android.widget.Toast;
+public class MainActivity extends Activity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+final TextView display=(TextView)findViewById(R.id.display);
+Button button = (Button) findViewById(R.id.button);
+button.setOnClickListener(new OnClickListener() {
+@Override
+public void onClick(View arg0) {
+display.setText("Welcome to Android Programming World");
+}
+});
 }
 }
+____________________________________
+
+6.Saving A File MainActivity.java file
+package com.example.menu;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.widget.Toast;
+public class MainActivity extends Activity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
 }
-System.out.println("TRACE:"+trace);
-System.out.println("TRANSPOSE");
-for(i=0;i&lt;m;i++)
-{
-for(j=0;j&lt;n;j++)
-{
-System.out.print(b[i][j]);
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+getMenuInflater().inflate(R.menu.activity_main, menu);
+return true;
 }
-System.out.println(" ");
-}
-}
-}</code></pre>
-______________________________________
-6.SUM AND REVERSE OF A NUMBER
-Ten
-~num: int
-~rem: int
-~sum: int=0
-~rev: int=0
-~sumrev()
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Tenn
-{
-int num,rem,sum=0,rev=0;
-public static void main(String args[])
-{
-Tenn obj=new Tenn();
-obj.sumrev();
-}
-void sumrev()
-{
-Scanner in=new Scanner(System.in);
-System.out.println("ENTER THE NUMBER:");
-num=in.nextInt();
-while(num!=0)
-{
-rem=num%10;
-sum=sum+rem;
-rev=rem+(rev*10);
-num=num/10;
-}
-System.out.println("SUM:"+sum);
-System.out.println("REVERSE:"+rev);
-}
-}</code></pre>
-______________________________________
-7.SUM OF TWO COMPLEX NUMBERS
-complex
-~real: int
-~image: int
-add(complex c1,complex c2):Complex
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Complex
-{
-int real,image;
-public static void main(String args[])
-{
-Scanner in=new Scanner(System.in);
-Complex c1=new Complex();
-Complex c2=new Complex();
-System.out.println("ENTER THE FIRST COMPLEX NUMBER:");
-c1.real=in.nextInt();
-c1.image=in.nextInt();
-System.out.println("ENTER THE SECOND COMPLEX NUMBER:"); 
-c2.real=in.nextInt();
-c2.image=in.nextInt();
-c1.add(c1,c2);
-}
-void add(Complex c1,Complex c2)
-{
-Complex c3=new Complex();
-c3.real=c1.real+c2.real;
-c3.image=c1.image+c2.image;
-System.out.println("SUM:"+c3.real+"+"+c3.image);
-}
-}</code></pre>
-______________________________________
-8.SORT SET OF NUMBERS
-sortarray
-~n: int
-~temp: int
-~a[]: int
-Source Code:
-<pre><code>import java.util.Scanner;
-public class Sortarray {
-public static void main(String[] args) {
-int n, temp;
-Scanner s = new Scanner(System.in);
-System.out.print("Enter no. of elements you want in array:");
-n = s.nextInt();
-int a[] = new int[n];
-System.out.println("Enter all the elements:");
-for (int i = 0; i &lt; n; i++) {
-a[i] = s.nextInt();
-}
-for (int i = 0; i &lt; n; i++) {
-for (int j = i + 1; j &lt; n; j++) {
-if (a[i] &gt; a[j]) {
-temp = a[i];
-a[i] = a[j];
-a[j] = temp;
-}
-}
-}
-System.out.print("After Sorting:");
-for (int i = 0; i &lt; n - 1; i++) {
-System.out.print(a[i] + ",");
-}
-System.out.print(a[n - 1]);
-}
-}</code></pre>
-______________________________________
-9.APPLET FOR SMILING FACE
-smiley
-Source Code:
-<pre><code>import java.applet.*;
-import java.awt.*;
-public class smiley extends Applet {
-public void paint(Graphics g)
-{
-// Oval for face outline
-g.setColor(Color.YELLOW);
-g.fillOval(80, 70, 150, 150);
-// Ovals for eyes
-// with black color filled
-g.setColor(Color.BLACK);
-g.fillOval(120, 120, 15, 15);
-g.fillOval(170, 120, 15, 15);
-// Arc for the smile
-g.drawArc(125, 140, 60, 50, 180, 180);
-}
-}</code></pre>
-______________________________________
-10.ODD AND EVEN NUMBERS
-Odd even Oddeven
-thread
-~i: int ~i: int ob1:odd
-~n: int=10 ~n: int ob2:even
-+run:void +run:void
-Source Code:
-<pre><code>import java.io.*;
-import java.util.*;
-class Odd implements Runnable
-{
-int i,n=10;
-public void run()
-{
-for(i=1;i&lt;n;i=i+2)
-{
-System.out.println("ODD:"+i);
+public boolean onOptionsItemSelected(MenuItem item) {
+switch (item.getItemId()){
+case R.id.open:
+Toast.makeText(getApplicationContext(),"File Opened",Toast.LENGTH_LONG).show();
+return true;
+case R.id.close:
+Toast.makeText(getApplicationContext(),"File Saved",Toast.LENGTH_LONG).show();
+return true;
+default:
+return super.onOptionsItemSelected(item);
 }
 }
 }
-class Even implements Runnable
-{
-int i,n=10;
-public void run()
-{
-for(i=0;i&lt;n;i=i+2)
-{
-System.out.println("EVEN:"+i);
+_____________________________________ 
+
+7.Array Adapter MainActivity.java file
+package com.example.arrayadapter;
+import java.util.ArrayList;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+public class MainActivity extends Activity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+Spinner spin = (Spinner) findViewById(R.id.spinner);
+final ArrayList<String> items = new ArrayList<String>();
+items.add("ITEMS");
+items.add("COMPUTER");
+items.add("MOUSE");
+ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,items);
+aa.setDropDownViewResource(
+android.R.layout.simple_spinner_dropdown_item);
+spin.setAdapter(aa);
 }
 }
+___________________________________
+
+8. Intend MainActivity.java file
+package com.example.intent;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+import android.content.Intent;
+import android.view.View;
+import android.widget.Button;
+public class MainActivity extends Activity {
+Button jumpbtn;
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.activity_main);
+jumpbtn = (Button)findViewById(R.id.button1);
+jumpbtn.setOnClickListener(new View.OnClickListener() {
+@Override
+public void onClick(View v) {
+// TODO Auto-generated method stub
+Intent i = new Intent(MainActivity.this,Newactivity.class);
+startActivity(i);
 }
-class OddEvenThread
-{
-public static void main(String args[])
-{
-Even ob2=new Even();
-Thread obj2=new Thread(ob2);
-obj2.start();
-Odd ob1=new Odd();
-Thread obj1=new Thread(ob1);
-obj1.start();
+});
 }
-}</code></pre>
-__________________________________
+
+SecondActivity.java file
+package com.example.intent;
+import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
+public class Newactivity extends Activity {
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+super.onCreate(savedInstanceState);
+setContentView(R.layout.second);
+}
+@Override
+public boolean onCreateOptionsMenu(Menu menu) {
+// Inflate the menu; this adds items to the action bar if it is present.
+getMenuInflater().inflate(R.menu.activity_newactivity, menu);
+return true;
+}
+}
+____________________________________
         </div>
+
         <div class="status-bar">
-            <button onclick="exportToNotepad()" style="background: #0078d7; color: white; border: none; padding: 2px 10px; cursor: pointer; font-family: inherit; font-size: 11px; margin-left: 10px; border-radius: 2px;">Open in Notepad</button>
-            <span class="status-item">Ln 1, Col 1</span>
-            <span class="status-item">100%</span>
-            <span class="status-item">Windows (CRLF)</span>
-            <span class="status-item">UTF-8</span>
+            <div class="status-item" style="flex: 1; text-align: left; padding-left: 10px;">Ready</div>
+            <div class="status-item">UTF-8</div>
+            <div class="status-item">Windows (CRLF)</div>
+            <div class="status-item">100%</div>
+            <div class="status-item">Ln 1, Col 1</div>
         </div>
     </body>
 </html>
