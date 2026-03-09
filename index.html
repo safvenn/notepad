@@ -154,6 +154,63 @@
                 background: #0078d7;
                 color: #ffffff;
             }
+
+            /* Read Only Improvements */
+            .read-only-indicator {
+                position: absolute;
+                top: 38px;
+                right: 25px;
+                background: #fff8e1;
+                color: #f57f17;
+                padding: 4px 14px;
+                border-radius: 20px;
+                font-size: 10px;
+                font-weight: 700;
+                border: 1px solid #ffe082;
+                z-index: 10;
+                pointer-events: none;
+                text-transform: uppercase;
+                letter-spacing: 0.8px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            }
+
+            .section-header {
+                color: #0078d7;
+                font-weight: bold;
+                border-bottom: 2px solid #0078d7;
+                margin-top: 30px;
+                margin-bottom: 15px;
+                padding-bottom: 5px;
+                font-size: 18px;
+            }
+
+            .program-title {
+                color: #2b88d8;
+                font-weight: 500;
+                margin-top: 20px;
+                margin-bottom: 5px;
+                background: #f8f9fa;
+                padding: 5px 10px;
+                border-left: 4px solid #0078d7;
+            }
+
+            .copy-btn {
+                float: right;
+                background: #efefef;
+                border: 1px solid #ccc;
+                padding: 2px 8px;
+                font-size: 11px;
+                cursor: pointer;
+                border-radius: 3px;
+                color: #333;
+                transition: all 0.2s;
+            }
+
+            .copy-btn:hover {
+                background: #0078d7;
+                color: white;
+                border-color: #0078d7;
+            }
         </style>
         <script>
             // Panic Key: Press 'Escape' to immediately redirect to Google
@@ -175,31 +232,48 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
             }
+
+            function copyToClipboard(text, btn) {
+                navigator.clipboard.writeText(text).then(() => {
+                    const originalText = btn.innerText;
+                    btn.innerText = 'Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
         </script>
     </head>
     <body>
         
+        <div class="read-only-indicator">Read Only Mode</div>
+
         <div class="menu-bar">
-            <div class="menu-item" onclick="exportToNotepad()">Save</div>
-            <div class="menu-item">Edit</div>
+            <div class="menu-item" onclick="exportToNotepad()">File</div>
+            <div class="menu-item" title="Editing is disabled" style="opacity: 0.5; cursor: not-allowed;">Edit</div>
             <div class="menu-item">Format</div>
             <div class="menu-item">View</div>
             <div class="menu-item">Help</div>
         </div>
 
-        <div class="notepad-content" contenteditable="true" spellcheck="false">
-SHELL
-___________________________________
-
-1. area of a circle.
+        <div class="notepad-content" contenteditable="false" spellcheck="false">
+<div class="section-header">SHELL SCRIPTS</div>
+<div class="program-container">
+<div class="program-title">1. Area of a Circle <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "Enter the radius"
 read r
 echo $r
 echo "Area of the circle is"
 echo "3.14*$r*$r"|bc 
-_________________________________
+</pre>
+</div>
 
-2. even or odd.
+<div class="program-container">
+<div class="program-title">2. Even or Odd <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "enter a number:"
 read n
 rem=$(( $n % 2 ))
@@ -209,9 +283,12 @@ echo "$n is even number"
 else
 echo "$n is odd number"
 fi
-___________________________________
+</pre>
+</div>
 
-3. greatest of three numbers.
+<div class="program-container">
+<div class="program-title">3. Greatest of Three Numbers <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "Enter three Integers:"
 read a b c
 if [ $a -gt $b -a $a -gt $c ]
@@ -223,9 +300,12 @@ echo "$b is Greatest"
 else
 echo "$c is Greatest!"
 fi
-________________________________
+</pre>
+</div>
 
-4. sum of all digits
+<div class="program-container">
+<div class="program-title">4. Sum of All Digits <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "Enter a Number:"
 read n
 temp=$n
@@ -238,9 +318,12 @@ n=$(( $n / 10 ))
 sum=$(( $sum + $sd ))
 done
 echo "Sum is $sum"
-___________________________________
+</pre>
+</div>
 
-5. find reverse of a number.
+<div class="program-container">
+<div class="program-title">5. Reverse of a Number <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "Enter a Number:"
 read a
 rev=0
@@ -254,9 +337,12 @@ rev=`expr $temp + $sd`
 a=`expr $a / 10`
 done
 echo "Reverse of $or is $rev"
-_______________________________
+</pre>
+</div>
 
-6. prime numbers
+<div class="program-container">
+<div class="program-title">6. Prime Numbers <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "How many prime numbers:"
 read limit
 echo "1"
@@ -281,9 +367,12 @@ echo "$i"
 fi
 i=$(( $i+1 ))
 done 
-___________________________________
+</pre>
+</div>
 
-7.fibinocci numbers.
+<div class="program-container">
+<div class="program-title">7. Fibonacci Series <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "how many numbers do you want of Fibinocci Series?"
 read total
 x=0
@@ -300,9 +389,12 @@ echo "$z"
 x=$y
 y=$z
 done
-____________________________________
+</pre>
+</div>
 
-8. factorial of a number.
+<div class="program-container">
+<div class="program-title">8. Factorial of a Number <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "Enter the number"
 read n
 fact=1
@@ -312,9 +404,12 @@ fact=`expr $fact \* $n`
 n=`expr $n - 1`
 done
 echo "Factorial is $fact"
-____________________________________
+</pre>
+</div>
 
-9.GoodMorning/Good afternoon /
+<div class="program-container">
+<div class="program-title">9. Greeting based on Time <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 h=$(date +"%H")
 if [ $h -gt 6 -a $h -le 12 ]
 then
@@ -325,9 +420,12 @@ echo "good afternoon"
 else
 echo "good evening"
 fi
-____________________________________
+</pre>
+</div>
 
-10.armstrong or not.
+<div class="program-container">
+<div class="program-title">10. Armstrong Number <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 echo "Enter a number"
 read c
 x=$c
@@ -347,9 +445,12 @@ echo "it is an Armstrong number"
 else
 echo "it is not an armstrong number"
 fi 
-___________________________________
+</pre>
+</div>
 
-11. palindrome or not.
+<div class="program-container">
+<div class="program-title">11. Palindrome String <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 read -p "Enter the String :" string
 len=${#string}
 for (( i=$len -1; i>=0; i--))
@@ -365,12 +466,14 @@ echo "Given string is palindrome"
 else
 echo "Given string is not a palindrome"
 fi 
-_________________________________
+</pre>
+</div>
 
-ANDROID
-___________________________________
+<div class="section-header">ANDROID PROGRAMS</div>
 
-1.Prime or Not MainActivity.java file
+<div class="program-container">
+<div class="program-title">1. Prime or Not (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.primenumber;
 import android.os.Bundle;
 import android.app.Activity;
@@ -407,9 +510,12 @@ t.show();
 }
 });
 }} 
-_______________________________
+</pre>
+</div>
 
-2.Multiplication MainActivity.java file
+<div class="program-container">
+<div class="program-title">2. Multiplication Table (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.multiplicationyims;
 import android.os.Bundle;
 import android.app.Activity;
@@ -446,9 +552,12 @@ result.setText(buffer);
 }
 });
 } 
-_______________________________ 
+</pre>
+</div>
 
-3.TOAST MainActivity.java file
+<div class="program-container">
+<div class="program-title">3. Toast Message (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.toastmessage;
 import android.os.Bundle;
 import android.app.Activity;
@@ -479,9 +588,12 @@ getMenuInflater().inflate(R.menu.activity_main, menu);
 return true;
 }
 }
-__________________________________ 
+</pre>
+</div>
 
-4.Add Two Numbers MainActivity.java file
+<div class="program-container">
+<div class="program-title">4. Add Two Numbers (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
@@ -511,9 +623,12 @@ double sum = num1 + num2;
 addResult.setText(Double.toString(sum));
 }
 }); }
-_____________________________________
+</pre>
+</div>
 
-5.Simple user MainActivity.java file
+<div class="program-container">
+<div class="program-title">5. Display Message (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.displaymessage;
 import android.os.Bundle;
 import android.app.Activity;
@@ -537,9 +652,12 @@ display.setText("Welcome to Android Programming World");
 });
 }
 }
-____________________________________
+</pre>
+</div>
 
-6.Saving A File MainActivity.java file
+<div class="program-container">
+<div class="program-title">6. Menu and File Operations (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.menu;
 import android.os.Bundle;
 import android.app.Activity;
@@ -571,9 +689,12 @@ return super.onOptionsItemSelected(item);
 }
 }
 }
-_____________________________________ 
+</pre>
+</div>
 
-7.Array Adapter MainActivity.java file
+<div class="program-container">
+<div class="program-title">7. Array Adapter (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.arrayadapter;
 import java.util.ArrayList;
 import android.os.Bundle;
@@ -587,7 +708,7 @@ protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_main);
 Spinner spin = (Spinner) findViewById(R.id.spinner);
-final ArrayList<String> items = new ArrayList<String>();
+final ArrayList&lt;String&gt; items = new ArrayList&lt;String&gt;();
 items.add("ITEMS");
 items.add("COMPUTER");
 items.add("MOUSE");
@@ -597,9 +718,12 @@ android.R.layout.simple_spinner_dropdown_item);
 spin.setAdapter(aa);
 }
 }
-___________________________________
+</pre>
+</div>
 
-8. Intend MainActivity.java file
+<div class="program-container">
+<div class="program-title">8. Intent (MainActivity.java) <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -623,8 +747,12 @@ startActivity(i);
 }
 });
 }
+</pre>
+</div>
 
-SecondActivity.java file
+<div class="program-container">
+<div class="program-title">SecondActivity.java - Part of Intent <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
+<pre>
 package com.example.intent;
 import android.os.Bundle;
 import android.app.Activity;
@@ -642,6 +770,8 @@ getMenuInflater().inflate(R.menu.activity_newactivity, menu);
 return true;
 }
 }
+</pre>
+</div>
 ____________________________________
         </div>
 
