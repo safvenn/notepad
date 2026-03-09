@@ -83,7 +83,7 @@
                 align-items: center;
             }
             .menu-item:hover {
-                background-color: #e5f3ff;
+                background-color: #f0f0f0;
             }
 
             /* Content Area */
@@ -151,33 +151,14 @@
 
             /* Authentic Text Selection */
             ::selection {
-                background: #0078d7;
+                background: #962b2b;
                 color: #ffffff;
             }
 
-            /* Read Only Improvements */
-            .read-only-indicator {
-                position: absolute;
-                top: 38px;
-                right: 25px;
-                background: #fff8e1;
-                color: #f57f17;
-                padding: 4px 14px;
-                border-radius: 20px;
-                font-size: 10px;
-                font-weight: 700;
-                border: 1px solid #ffe082;
-                z-index: 10;
-                pointer-events: none;
-                text-transform: uppercase;
-                letter-spacing: 0.8px;
-                box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            }
-
             .section-header {
-                color: #0078d7;
+                color: #000000;
                 font-weight: bold;
-                border-bottom: 2px solid #0078d7;
+                border-bottom: 2px solid #000000;
                 margin-top: 30px;
                 margin-bottom: 15px;
                 padding-bottom: 5px;
@@ -185,13 +166,13 @@
             }
 
             .program-title {
-                color: #2b88d8;
+                color: #000000;
                 font-weight: 500;
                 margin-top: 20px;
                 margin-bottom: 5px;
                 background: #f8f9fa;
                 padding: 5px 10px;
-                border-left: 4px solid #0078d7;
+                border-left: 4px solid #000000;
             }
 
             .copy-btn {
@@ -207,9 +188,65 @@
             }
 
             .copy-btn:hover {
-                background: #0078d7;
+                background: #000000;
                 color: white;
-                border-color: #0078d7;
+                border-color: #000000;
+            }
+
+            /* Compact Search Results Styles */
+            .notepad-content.searching .section-header {
+                margin-top: 10px;
+                margin-bottom: 10px;
+                font-size: 14px;
+            }
+            .notepad-content.searching .program-container {
+                margin-bottom: 8px;
+            }
+            .notepad-content.searching .program-title {
+                margin-top: 5px;
+                font-size: 13px;
+                padding: 3px 10px;
+            }
+            .notepad-content.searching pre {
+                font-size: 12px;
+                display: block;
+                max-height: 150px;
+                overflow-y: auto;
+                background: #fafafa;
+                border: 1px solid #eee;
+                padding: 5px;
+            }
+
+            #noResults {
+                display: none;
+                text-align: center;
+                padding: 40px;
+                color: #999;
+                font-style: italic;
+            }
+
+            /* Search Bar Styling */
+            .search-container {
+                margin-left: auto;
+                display: flex;
+                align-items: center;
+                padding: 0 10px;
+            }
+            .search-input {
+                border: 1px solid #eee;
+                padding: 3px 10px;
+                font-size: 11px;
+                font-family: 'Segoe UI', sans-serif;
+                width: 150px;
+                outline: none;
+                border-radius: 4px;
+                transition: all 0.2s;
+                background: #fdfdfd;
+            }
+            .search-input:focus {
+                border-color: #ccc;
+                background: #fff;
+                width: 180px;
             }
         </style>
         <script>
@@ -244,11 +281,53 @@
                     }, 2000);
                 });
             }
+
+            function searchPrograms() {
+                const input = document.getElementById('searchInput');
+                const filter = input.value.toLowerCase();
+                const content = document.querySelector('.notepad-content');
+                const containers = document.querySelectorAll('.program-container');
+                const headers = document.querySelectorAll('.section-header');
+                const noResults = document.getElementById('noResults');
+
+                let matchCount = 0;
+
+                if (filter === "") {
+                    content.classList.remove('searching');
+                } else {
+                    content.classList.add('searching');
+                }
+
+                containers.forEach(container => {
+                    const title = container.querySelector('.program-title').innerText.toLowerCase();
+                    const body = container.querySelector('pre').innerText.toLowerCase();
+                    if (title.includes(filter) || body.includes(filter)) {
+                        container.style.display = "";
+                        matchCount++;
+                    } else {
+                        container.style.display = "none";
+                    }
+                });
+
+                // Show/hide headers based on visible content
+                headers.forEach(header => {
+                    let next = header.nextElementSibling;
+                    let hasVisible = false;
+                    while (next && next.classList.contains('program-container')) {
+                        if (next.style.display !== "none") {
+                            hasVisible = true;
+                            break;
+                        }
+                        next = next.nextElementSibling;
+                    }
+                    header.style.display = hasVisible || filter === "" ? "" : "none";
+                });
+
+                noResults.style.display = (matchCount === 0 && filter !== "") ? "block" : "none";
+            }
         </script>
     </head>
     <body>
-        
-        <div class="read-only-indicator">Read Only Mode</div>
 
         <div class="menu-bar">
             <div class="menu-item" onclick="exportToNotepad()">File</div>
@@ -256,9 +335,13 @@
             <div class="menu-item">Format</div>
             <div class="menu-item">View</div>
             <div class="menu-item">Help</div>
+            <div class="search-container">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search programs..." onkeyup="searchPrograms()">
+            </div>
         </div>
 
         <div class="notepad-content" contenteditable="false" spellcheck="false">
+            <div id="noResults">No matching programs found.</div>
 <div class="section-header">SHELL SCRIPTS</div>
 <div class="program-container">
 <div class="program-title">1. Area of a Circle <button class="copy-btn" onclick="copyToClipboard(this.parentElement.nextElementSibling.innerText, this)">Copy</button></div>
