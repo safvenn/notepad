@@ -151,68 +151,74 @@
 
             /* Authentic Text Selection */
             ::selection {
-                background: #962b2b;
+                background: #000000;
                 color: #ffffff;
             }
 
             .section-header {
                 color: #000000;
                 font-weight: bold;
-                border-bottom: 2px solid #000000;
-                margin-top: 30px;
+                border-bottom: 1px solid #000000;
+                margin-top: 25px;
                 margin-bottom: 15px;
-                padding-bottom: 5px;
-                font-size: 18px;
+                padding-bottom: 2px;
+                font-size: 16px;
+                text-transform: uppercase;
+                letter-spacing: 1px;
             }
 
             .program-title {
                 color: #000000;
-                font-weight: 500;
-                margin-top: 20px;
+                font-weight: bold;
+                margin-top: 15px;
                 margin-bottom: 5px;
-                background: #f8f9fa;
-                padding: 5px 10px;
-                border-left: 4px solid #000000;
+                background: #fdfdfd;
+                padding: 4px 8px;
+                border: 1px solid #eee;
+                
             }
 
             .copy-btn {
                 float: right;
-                background: #efefef;
-                border: 1px solid #ccc;
-                padding: 2px 8px;
-                font-size: 11px;
-                cursor: pointer;
-                border-radius: 3px;
-                color: #333;
-                transition: all 0.2s;
+                background: #ffffff;
+                border: 1px solid #ababab;
+                padding: 1px 6px;
+                font-size: 10px;
+                cursor: default;
+                border-radius: 0;
+                color: #000;
+                transition: none;
             }
 
             .copy-btn:hover {
-                background: #000000;
-                color: white;
-                border-color: #000000;
+                background: #e5f3ff;
+                border-color: #0078d7;
+            }
+
+            .copy-btn:active {
+                background: #cce8ff;
             }
 
             /* Compact Search Results Styles */
             .notepad-content.searching .section-header {
                 margin-top: 10px;
                 margin-bottom: 10px;
-                font-size: 14px;
+                font-size: 13px;
             }
             .notepad-content.searching .program-container {
-                margin-bottom: 8px;
+                margin-bottom: 5px;
             }
             .notepad-content.searching .program-title {
-                margin-top: 5px;
-                font-size: 13px;
-                padding: 3px 10px;
+                margin-top: 3px;
+                font-size: 12px;
+                padding: 2px 8px;
             }
             .notepad-content.searching pre {
                 font-size: 12px;
                 display: block;
-                max-height: 150px;
+                max-height: 120px;
                 overflow-y: auto;
-                background: #fafafa;
+                background: #ffffff;
                 border: 1px solid #eee;
                 padding: 5px;
             }
@@ -220,9 +226,10 @@
             #noResults {
                 display: none;
                 text-align: center;
-                padding: 40px;
-                color: #999;
-                font-style: italic;
+                padding: 30px;
+                color: #000;
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 13px;
             }
 
             /* Search Bar Styling */
@@ -233,20 +240,18 @@
                 padding: 0 10px;
             }
             .search-input {
-                border: 1px solid #eee;
-                padding: 3px 10px;
+                border: 1px solid #d1d1d1;
+                padding: 2px 8px;
                 font-size: 11px;
                 font-family: 'Segoe UI', sans-serif;
-                width: 150px;
+                width: 140px;
                 outline: none;
-                border-radius: 4px;
-                transition: all 0.2s;
-                background: #fdfdfd;
+                border-radius: 0;
+                background: #fff;
             }
             .search-input:focus {
-                border-color: #ccc;
-                background: #fff;
-                width: 180px;
+                border-color: #000;
+                width: 160px;
             }
         </style>
         <script>
@@ -278,6 +283,20 @@
                     setTimeout(() => {
                         btn.innerText = originalText;
                         btn.classList.remove('copied');
+                    }, 2000);
+                });
+            }
+
+            function copyAllToClipboard() {
+                const content = document.querySelector('.notepad-content').innerText;
+                navigator.clipboard.writeText(content).then(() => {
+                    const btn = document.getElementById('copyAllBtn');
+                    const originalText = btn.innerText;
+                    btn.innerText = 'All Copied!';
+                    btn.style.fontWeight = 'bold';
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.fontWeight = '';
                     }, 2000);
                 });
             }
@@ -331,6 +350,7 @@
 
         <div class="menu-bar">
             <div class="menu-item" onclick="exportToNotepad()">File</div>
+            <div class="menu-item" id="copyAllBtn" onclick="copyAllToClipboard()">Copy All</div>
             <div class="menu-item" title="Editing is disabled" style="opacity: 0.5; cursor: not-allowed;">Edit</div>
             <div class="menu-item">Format</div>
             <div class="menu-item">View</div>
